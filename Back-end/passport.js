@@ -20,7 +20,7 @@ passport.use(new JwtStrategy({
     secretOrKey:'Ysquare'
 },(payload,done)=>{
    console.log(payload,'pa')
-    user.findById({_id:payload.sub},(err,user)=>{
+    user.findById({_id:payload.sub.id},(err,user)=>{
       console.log('user',user)
      if(err){
        return done(err,false)

@@ -58,5 +58,32 @@ exports.UserDeleteController = async(req,res) =>{
    }
 }
 
+exports.UserEditController = async (req,res)=>{
+  const id = req.query.data
+  const {email,password,role} = req.body
+ const editId = await User.findById({_id:id})
+  console.log(email)
+ if(editId){
+   const editUser = await User.findByIdAndUpdate({_id:id},{
+     email:email,
+     password:password,
+     role:role == "" ? editId.role:role
+   },)
+   console.log(editUser)
+   if(editUser){
+        res.status(200).json({data:editUser})
+   }
+ }
+}
+exports.UserDetailsController = async(req,res)=>{
+const id = req.query.data
+console.log(id)
+const Details = await User.findById({_id:id})
+console.log(Details)
+if(Details){
+   res.status(200).json({data:Details})
+}
+}
+
 
 
